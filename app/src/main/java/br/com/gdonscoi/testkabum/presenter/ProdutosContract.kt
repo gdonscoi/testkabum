@@ -26,7 +26,5 @@ interface ProdutosContract {
         fun loadProdutos()
 
         fun loadMoreProdutos()
-
-        fun unsubscribe()
     }
 }

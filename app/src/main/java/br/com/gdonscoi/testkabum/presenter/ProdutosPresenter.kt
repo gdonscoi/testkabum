@@ -1,16 +1,14 @@
 package br.com.gdonscoi.testkabum.presenter
 
-import android.util.Log
-import br.com.gdonscoi.testkabum.data.model.Produto
+import br.com.gdonscoi.testkabum.data.model.ProdutosResposta
 import br.com.gdonscoi.testkabum.data.source.KabumAPI
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProdutosPresenter : ProdutosContract.Presenter {
 
     lateinit var view: ProdutosContract.View
-    private val subscriptions = CompositeDisposable()
     private var loading = false
     private var page: Int = 1
 
@@ -19,58 +17,44 @@ class ProdutosPresenter : ProdutosContract.Presenter {
     }
 
     override fun loadProdutos() {
-        val produtosAPI = ArrayList<Produto>()
-        this.loading = true
-        view.showTopLoading(this.loading)
-        this.page = 1
+        GlobalScope.launch(Dispatchers.Main) {
+            loading = true
+            view.showTopLoading(loading)
+            page = 1
 
-        val subscription = KabumAPI().loadHomeProdutos(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ produto ->
-                    produtosAPI.add(produto)
-                }, { e ->
-                    Log.e("Presenter", e.message)
-                    view.showTopLoading(false)
-                    view.showError()
-                }, {
-                    view.updateList(produtosAPI)
-                    this.loading = false
-                    view.showTopLoading(this.loading)
-                })
+            val result = callAPI()
 
-        subscriptions.add(subscription)
+            result?.produtos?.let { view.updateList(it) }
+            loading = false
+            view.showTopLoading(loading)
+        }
     }
+
 
     override fun loadMoreProdutos() {
-        val produtosAPI = ArrayList<Produto>()
-        this.loading = true
-        view.showBottomLoading(this.loading)
-        this.page++
+        GlobalScope.launch(Dispatchers.Main) {
+            loading = true
+            view.showBottomLoading(loading)
+            page++
 
-        val subscription = KabumAPI().loadHomeProdutos(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ produto ->
-                    produtosAPI.add(produto)
-                }, { e ->
-                    Log.e("Presenter", e.message)
-                    view.showTopLoading(false)
-                    view.showError()
-                }, {
-                    view.addList(produtosAPI)
-                    this.loading = false
-                    view.showBottomLoading(this.loading)
-                })
+            val result = callAPI()
 
-        subscriptions.add(subscription)
-    }
-
-    override fun unsubscribe() {
-        subscriptions.clear()
+            result?.produtos?.let { view.addList(it) }
+            loading = false
+            view.showBottomLoading(loading)
+        }
     }
 
     override fun isLoading(): Boolean {
         return this.loading
+    }
+
+    private suspend fun callAPI(): ProdutosResposta? {
+        return try {
+            KabumAPI().loadHomeProdutos(page).await()
+        } catch (e: Throwable) {
+            view.showError()
+            null
+        }
     }
 }
