@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="5dp"
+    android:background="@color/colorAccent"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/container_top_card" />
+
+        <RelativeLayout
+            android:id="@+id/container_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/container_top">
+
+            <ImageView
+                android:id="@+id/img_produto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/desc_img_produto"
+                tool:background="#111111" />
+
+            <TextView
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_toEndOf="@id/img_produto"
+                android:lines="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#111"
+                android:textStyle="bold"
+                tool:text="SSD Kingston A400, 240GB, SATA, Leitura 500MB/s, Grava\u00e7\u00e3o 350MB/s - SA400S37/240G" />
+
+            <include layout="@layout/container_avaliacao_card" />
+
+            <include layout="@layout/container_preco_desconto_card" />
+
+            <include layout="@layout/container_preco_card" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

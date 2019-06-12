@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/container_preco"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/container_preco_desconto"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="30dp"
+    android:layout_toEndOf="@id/img_produto"
+    tool:showIn="@layout/produto_card">
+
+    <TextView
+        android:id="@+id/preco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        tool:text="R$ 199,88" />
+
+    <TextView
+        android:id="@+id/texto_preco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@id/preco"
+        android:text="@string/text_preco"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+</RelativeLayout>

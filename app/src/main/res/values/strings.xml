@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Kabum gdonscoi</string>
+    <string name="featured_products">Produtos em destaque</string>
+    <string name="error_message">Erro ao buscar dados</string>
+    <string name="basket_menu_desc">Carrinhho de compras</string>
+    <string name="text_preco_desconto">à vista</string>
+    <string name="text_preco">em até 12x</string>
+
+    <string name="menu_inicio">Início</string>
+    <string name="menu_categoria">Categorias</string>
+    <string name="menu_favorito">Favoritos</string>
+    <string name="menu_conta">Minha Conta</string>
+
+    <string name="desc_img_avaliacao">Imagem de avaliação</string>
+    <string name="desc_img_produto">Imagem do produto</string>
+    <string name="desc_button_favorito">Favoritar produto</string>
+    <string name="desc_button_carrinho">Adicionar ao carrinho de compras</string>
+    <string name="desc_img_fabricante">Logo do fabricante</string>
+    <string name="desc_img_promocao">Imagem promoção</string>
+    <string name="desc_logo">Imagem Logo kabum</string>
+</resources>

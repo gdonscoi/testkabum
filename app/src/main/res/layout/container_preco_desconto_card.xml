@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/container_preco_desconto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/container_avaliacao"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_toEndOf="@id/img_produto"
+    tool:showIn="@layout/produto_card">
+
+    <TextView
+        android:id="@+id/preco_desconto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/green_black"
+        android:textStyle="bold"
+        tool:text="R$ 199,88" />
+
+    <TextView
+        android:id="@+id/texto_desconto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@id/preco_desconto"
+        android:text="@string/text_preco_desconto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/green_black"
+        android:textStyle="bold" />
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/container_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="10dp"
+    tool:showIn="@layout/produto_card">
+
+    <ImageView
+        android:id="@+id/img_fabricante"
+        android:layout_width="55dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        tool:background="#111111"
+        android:contentDescription="@string/desc_img_fabricante" />
+
+    <ImageButton
+        android:id="@+id/img_carrinho"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_basket_normal"
+        android:contentDescription="@string/desc_button_carrinho" />
+
+    <ImageButton
+        android:id="@+id/img_favorito"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:layout_toStartOf="@id/img_carrinho"
+        android:background="@drawable/ic_fav_normal"
+        android:contentDescription="@string/desc_button_favorito" />
+</RelativeLayout>
