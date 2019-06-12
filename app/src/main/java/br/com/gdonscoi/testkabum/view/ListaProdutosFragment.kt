@@ -72,11 +72,6 @@ class ListaProdutosFragment : Fragment(), ProdutosContract.View {
         presenter.loadProdutos()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        presenter.unsubscribe()
-    }
-
     override fun showTopLoading(value: Boolean) {
         this.listRefresh.isRefreshing = value
     }

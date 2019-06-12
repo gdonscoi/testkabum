@@ -1,12 +1,10 @@
 package br.com.gdonscoi.testkabum.data.source
 
-import br.com.gdonscoi.testkabum.data.model.Produto
 import com.google.gson.GsonBuilder
-import io.reactivex.Observable
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
@@ -25,7 +23,7 @@ class KabumAPI {
 
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://servicespub.prod.api.aws.grupokabum.com.br/home/v1/")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient.build())
                 .build()
@@ -33,8 +31,5 @@ class KabumAPI {
         service = retrofit.create<KabumService>(KabumService::class.java)
     }
 
-    fun loadHomeProdutos(page: Int, limit: Int = 5): Observable<Produto> {
-        return service.loadHomeProdutos(page, limit)
-                .flatMap { produtos -> Observable.fromIterable(produtos.produtos) }
-    }
+     fun loadHomeProdutos(page: Int, limit: Int = 5) = service.loadHomeProdutos(page, limit)
 }
