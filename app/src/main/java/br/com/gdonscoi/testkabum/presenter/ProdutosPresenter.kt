@@ -1,5 +1,6 @@
 package br.com.gdonscoi.testkabum.presenter
 
+import br.com.gdonscoi.testkabum.data.model.ProdutosResposta
 import br.com.gdonscoi.testkabum.data.source.KabumAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,8 +22,9 @@ class ProdutosPresenter : ProdutosContract.Presenter {
             view.showTopLoading(loading)
             page = 1
 
-            val result = KabumAPI().loadHomeProdutos(page).await()
-            view.updateList(result.produtos)
+            val result = callAPI()
+
+            result?.produtos?.let { view.updateList(it) }
             loading = false
             view.showTopLoading(loading)
         }
@@ -35,8 +37,9 @@ class ProdutosPresenter : ProdutosContract.Presenter {
             view.showBottomLoading(loading)
             page++
 
-            val result = KabumAPI().loadHomeProdutos(page).await()
-            view.addList(result.produtos)
+            val result = callAPI()
+
+            result?.produtos?.let { view.addList(it) }
             loading = false
             view.showBottomLoading(loading)
         }
@@ -44,5 +47,14 @@ class ProdutosPresenter : ProdutosContract.Presenter {
 
     override fun isLoading(): Boolean {
         return this.loading
+    }
+
+    private suspend fun callAPI(): ProdutosResposta? {
+        return try {
+            KabumAPI().loadHomeProdutos(page).await()
+        } catch (e: Throwable) {
+            view.showError()
+            null
+        }
     }
 }
