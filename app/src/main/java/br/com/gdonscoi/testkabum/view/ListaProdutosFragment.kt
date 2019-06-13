@@ -87,12 +87,13 @@ class ListaProdutosFragment : Fragment(), ProdutosContract.View {
 
     override fun updateList(list: List<Produto>) {
         this.produtos.clear()
-        addList(list)
+        this.produtos.addAll(list)
+        this.adapter.notifyDataSetChanged()
     }
 
     override fun addList(list: List<Produto>) {
         this.produtos.addAll(list)
-        this.adapter.notifyDataSetChanged()
+        this.adapter.notifyItemRangeInserted(this.adapter.itemCount-1, list.size)
     }
 
     override fun showError() {
